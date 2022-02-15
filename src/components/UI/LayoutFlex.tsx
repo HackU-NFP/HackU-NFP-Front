@@ -10,7 +10,7 @@ export type LayoutFlexProps = {
     | 'space-around';
   align?: 'flex-start' | 'flex-end' | 'center';
   direction?: 'row' | 'column';
-  wrap?: boolean;
+  wrap?: 'wrap' | 'nowrap';
   gap?: 'none' | 'small' | 'medium' | 'large';
   children: React.ReactNode;
 };
@@ -19,7 +19,7 @@ const LayoutFlex: React.FC<LayoutFlexProps> = ({
   justify = 'flex-start',
   align = 'flex-start',
   direction = 'row',
-  wrap = false,
+  wrap = 'wrap',
   gap = 'none',
   children = LayoutFlex,
 }) => {

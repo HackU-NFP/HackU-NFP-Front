@@ -14,7 +14,7 @@ export const _LayoutFlex = styled.div<LayoutFlexProps>`
     return props.direction
   }};
   flex-wrap: ${(props) => {
-    return props.wrap ? 'wrap' : 'nowrap'
+    return props.wrap
   }};
   gap: ${(props) => {
     const p = props.gap
