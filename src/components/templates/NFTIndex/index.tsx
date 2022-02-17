@@ -2,7 +2,14 @@ import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Grid } from 'react-loader-spinner';
 
-import { _NFTIndex_Main, _NFTIndex_Loading } from './index.styles';
+import {
+  _NFTIndex_Main,
+  _NFTIndex_Loading,
+  _NFTIndex_Image,
+  _NFTIndex_Figure,
+  _NFTIndex_ImageTextWrapper,
+  _NFTIndex_ImageText,
+} from './index.styles';
 
 // @ts-ignore
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
@@ -68,14 +75,14 @@ const NFTIndex = () => {
         >
           <Masonry gutter='10px'>
             {items.map((image, i) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={i}
-                alt='NFT'
-                src={image}
-                loading='lazy'
-                style={{ width: '100%', display: 'block' }}
-              />
+              <_NFTIndex_Figure key={i}>
+                <_NFTIndex_Image key={i} alt='NFT' src={image} loading='lazy' />
+                <_NFTIndex_ImageTextWrapper>
+                  <_NFTIndex_ImageText>
+                    {i + 'HogeImageHogeImageHogeImageHogeImage'}
+                  </_NFTIndex_ImageText>
+                </_NFTIndex_ImageTextWrapper>
+              </_NFTIndex_Figure>
             ))}
           </Masonry>
         </ResponsiveMasonry>
