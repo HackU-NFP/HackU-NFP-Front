@@ -40,11 +40,7 @@ const images = [
 const Main = styled.div`
   max-width: 95%;
   margin: 0 auto;
-  //height: 100%;
   padding: 30px;
-`;
-const _IMG = styled.img`
-  width: 300px;
 `;
 
 const Home: NextPage = () => {

@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-
-import { LayoutFlexProps } from "./LayoutFlex";
+import { LayoutFlexProps } from ".";
 
 export const _LayoutFlex = styled.div<LayoutFlexProps>`
   display: flex;
