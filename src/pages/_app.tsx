@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import './index.css';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const GlobalStyle = createGlobalStyle`
