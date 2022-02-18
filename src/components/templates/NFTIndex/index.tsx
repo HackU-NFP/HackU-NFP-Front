@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import disableScroll from 'disable-scroll';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Grid } from 'react-loader-spinner';
 
@@ -15,34 +16,11 @@ import ScrollTopButton from 'components/UI/ScrollTopButton';
 import NFTSlideShow from 'components/UI-combinations/NFTSlideShow';
 
 const images = [
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/400/300?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/400/300?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/400/300?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/400/300?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
+  'https://picsum.photos/900/800?image=10',
+  'https://picsum.photos/900/1200?image=206',
+  'https://picsum.photos/900/800?image=201',
+  'https://picsum.photos/900/900?image=209',
+  'https://picsum.photos/900/800?image=1050',
 ];
 
 const NFTIndex = () => {
@@ -55,25 +33,16 @@ const NFTIndex = () => {
   } = {
     gallery: () => setLayout('gallery'),
     flex: () => setLayout('flex'),
-    slideShow: (e) => disableScroll(),
+    slideShow: (e) => _disableScroll(),
   };
 
-  const preventDefaultScroll = (e) => {
-    e.preventDefault();
-  };
-  const disableScroll = () => {
+  const _disableScroll = () => {
     setIsSlideShow(true);
-    document.addEventListener('touchmove', preventDefaultScroll, {
-      passive: false,
-    });
-    document.addEventListener('mousewheel', preventDefaultScroll, {
-      passive: false,
-    });
+    disableScroll.on();
   };
   const releaseScroll = () => {
     setIsSlideShow(false);
-    document.removeEventListener('touchmove', preventDefaultScroll);
-    document.removeEventListener('mousewheel', preventDefaultScroll);
+    disableScroll.off();
   };
 
   function loadFunc() {
@@ -112,7 +81,11 @@ const NFTIndex = () => {
         </_NFTIndex_Container>
       </_NFTIndex_Main>
       {isSlideShow && (
-        <NFTSlideShow images={items} releaseScroll={releaseScroll} />
+        <NFTSlideShow
+          images={items}
+          loadFunc={loadFunc}
+          releaseScroll={releaseScroll}
+        />
       )}
     </>
   );

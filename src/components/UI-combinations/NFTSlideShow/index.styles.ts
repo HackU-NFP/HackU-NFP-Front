@@ -1,9 +1,10 @@
-import styled from "styled-components";
+import { loadDefaultErrorComponents } from "next/dist/server/load-components";
+import styled, { css } from "styled-components";
 import { breakpoints } from "styles";
 
 export const _NFTSlideShow_Main = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-color: rgba(255,255,255, 0.9);
   position: absolute;
   top: 0;
@@ -18,55 +19,62 @@ export const _NFTSlideShow_Container = styled.div`
 `
 
 export const _NFTSlideShow_CloseButtonWrapper = styled.div`
+  height: 40px;
   display: flex;
   justify-content: flex-end;
   z-index: 100;
 `
 
 export const _NFTSlideShow_ImageWrapper = styled.div`
-  width: 100vw;
-  height: 75%;
-  display: block;
+  height: 70%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
 
-  @media ${breakpoints.md} {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
+export const _NFTSlideShow_ArrowIconWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
 export const _NFTSlideShow_ImageContainer = styled.div`
   display: flex;
   justify-content: center;
-`
-
-export const _NFTSlideShow_ArrowIcon = styled.div`
-  display: none;
-
-  @media ${breakpoints.md} {
-    display: flex;
-  }
-`
-
-export const _NFTSlideShow_ArrowIconWrapper = styled.div`
-  display: flex;
   align-items: center;
-  background: rgb(191, 191, 191);
-  cursor: pointer;
-  height: 100px;
+`
 
-  @media ${breakpoints.md} {
-    height: 100%;
-  }
+export const _NFTSlideShow_ArrowIcon = styled.div<{ isActive: boolean; }>`
+  background: ${(props) => props.isActive ? 'rgb(229, 229, 229)' : 'rgb(114, 114, 114)'};
+  ${(props) => {
+    return !props.isActive && css`
+      cursor: pointer;
+    `
+  }}
 `
 
 export const _NFTSlideShow_Image = styled.img`
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 95vw;
+  max-height: 98%;
   user-select: none;
   pointer-events: none;
+`
 
-  @media ${breakpoints.md} {
-    max-height: 80%;
-  }
+export const _NFTSlideShow_BottomContainer = styled.div`
+  width: 100vw;
+  height: 27%;
+  background: #fff;
+
+`
+
+export const _NFTSlideShow_AutoButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`
+
+export const _NFTSlideShow_AutoButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
