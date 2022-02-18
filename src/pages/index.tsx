@@ -1,15 +1,9 @@
-import type { NextPage } from 'next';
-import LayoutFlex from 'components/UI/LayoutFlex';
-import Head from 'components/UI/Head';
+import NFTIndex from 'components/templates/NFTIndex';
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <>
-      <Head />
-      <LayoutFlex>
-        <div>Hoge</div>
-        <div>Hoge</div>
-      </LayoutFlex>
+      <NFTIndex />
     </>
   );
 };
