@@ -11,6 +11,7 @@ import {
 import NFTGalleryIndex from 'components/UI-combinations/NFTGalleryIndex';
 import NFTFlexIndex from 'components/UI-combinations/NFTFlexIndex';
 import LayoutButton from 'components/UI/LayoutButton';
+import ScrollTopButton from 'components/UI/ScrollTopButton';
 
 const images = [
   'https://picsum.photos/200/300?image=1050',
@@ -69,6 +70,7 @@ const NFTIndex = () => {
   return (
     <>
       <_NFTIndex_Main>
+        <ScrollTopButton />
         <LayoutButton layoutFunctions={layoutFunctions} layout={layout} />
         <_NFTIndex_Container>
           <InfiniteScroll
