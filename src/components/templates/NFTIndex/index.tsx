@@ -12,6 +12,7 @@ import NFTGalleryIndex from 'components/UI-combinations/NFTGalleryIndex';
 import NFTFlexIndex from 'components/UI-combinations/NFTFlexIndex';
 import LayoutButton from 'components/UI/LayoutButton';
 import ScrollTopButton from 'components/UI/ScrollTopButton';
+import NFTSlideShow from 'components/UI-combinations/NFTSlideShow';
 
 const images = [
   'https://picsum.photos/200/300?image=1050',
@@ -44,17 +45,35 @@ const images = [
   'https://picsum.photos/300/300?image=206',
 ];
 
-export type LayoutType = 'gallery' | 'flex';
-
 const NFTIndex = () => {
   const [layout, setLayout] = useState<LayoutType>('gallery');
+  const [isSlideShow, setIsSlideShow] = useState(false);
   const [items, setItems] = useState<string[]>([]);
 
   const layoutFunctions: {
-    [K in LayoutType]: React.MouseEventHandler<HTMLDivElement>;
+    [K in LayoutButtonType]: React.MouseEventHandler<HTMLDivElement>;
   } = {
     gallery: () => setLayout('gallery'),
     flex: () => setLayout('flex'),
+    slideShow: (e) => disableScroll(),
+  };
+
+  const preventDefaultScroll = (e) => {
+    e.preventDefault();
+  };
+  const disableScroll = () => {
+    setIsSlideShow(true);
+    document.addEventListener('touchmove', preventDefaultScroll, {
+      passive: false,
+    });
+    document.addEventListener('mousewheel', preventDefaultScroll, {
+      passive: false,
+    });
+  };
+  const releaseScroll = () => {
+    setIsSlideShow(false);
+    document.removeEventListener('touchmove', preventDefaultScroll);
+    document.removeEventListener('mousewheel', preventDefaultScroll);
   };
 
   function loadFunc() {
@@ -92,6 +111,9 @@ const NFTIndex = () => {
           </InfiniteScroll>
         </_NFTIndex_Container>
       </_NFTIndex_Main>
+      {isSlideShow && (
+        <NFTSlideShow images={items} releaseScroll={releaseScroll} />
+      )}
     </>
   );
 };

@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 
-import { LayoutType } from "components/templates/NFTIndex";
 import { breakpoints } from 'styles'
 
 export const _NFTIndex_ImageTextWrapper = styled.div`
