@@ -1,38 +1,38 @@
 import Link from 'next/link';
 import React from 'react';
 import {
-  _NFTIndex_Figure,
-  _NFTIndex_Image,
-  _NFTIndex_ImageTextWrapper,
-  _NFTIndex_ImageText,
+  _NFTImage_Figure,
+  _NFTImage_Image,
+  _NFTImage_ImageTextWrapper,
+  _NFTImage_ImageText,
 } from './index.styles';
 
-type NFTIndexProps = {
+type NFTImageProps = {
   image: string;
   layout: LayoutType;
   key: number;
 };
 
-const NFTIndex: React.FC<NFTIndexProps> = ({ image, layout, key }) => {
+const NFTImage: React.FC<NFTImageProps> = ({ image, layout, key }) => {
   return (
-    <_NFTIndex_Figure layout={layout} key={key}>
+    <_NFTImage_Figure layout={layout} key={key}>
       <Link href={`/12878`} passHref>
         <a target='_blank'>
-          <_NFTIndex_Image
+          <_NFTImage_Image
             alt='NFT'
             src={image}
             layout={layout}
             loading='lazy'
           />
-          <_NFTIndex_ImageTextWrapper>
-            <_NFTIndex_ImageText>
+          <_NFTImage_ImageTextWrapper>
+            <_NFTImage_ImageText>
               {'HogeImageHogeImageHogeImageHogeImage'}
-            </_NFTIndex_ImageText>
-          </_NFTIndex_ImageTextWrapper>
+            </_NFTImage_ImageText>
+          </_NFTImage_ImageTextWrapper>
         </a>
       </Link>
-    </_NFTIndex_Figure>
+    </_NFTImage_Figure>
   );
 };
 
-export default React.memo(NFTIndex);
+export default React.memo(NFTImage);

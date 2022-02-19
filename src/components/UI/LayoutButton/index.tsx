@@ -7,7 +7,7 @@ import { _LayoutButton_Button, _LayoutButton_Buttons } from './index.styles';
 type LayoutButtonProps = {
   layout: LayoutType;
   layoutFunctions: {
-    [K in LayoutButtonType]: React.MouseEventHandler<HTMLDivElement>;
+    [K in LayoutType]: React.MouseEventHandler<HTMLDivElement>;
   };
 };
 

@@ -1,26 +1,12 @@
 import React, { useCallback, useState } from 'react';
+import Link from 'next/link';
+
 import { IoMdClose, IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { BsFillPlayFill, BsStopFill } from 'react-icons/bs';
 import useInterval from 'use-interval';
 import { Line } from 'rc-progress';
 
-import {
-  _NFTSlideShow_Main,
-  _NFTSlideShow_Container,
-  _NFTSlideShow_CloseButtonWrapper,
-  _NFTSlideShow_ImageWrapper,
-  _NFTSlideShow_Image,
-  _NFTSlideShow_ImageContainer,
-  _NFTSlideShow_ArrowIcon,
-  _NFTSlideShow_BottomContainer,
-  _NFTSlideShow_AutoButtonWrapper,
-  _NFTSlideShow_AutoButtonContainer,
-  _NFTSlideShow_ArrowIconWrapper,
-  _NFTSlideShow_BottomText,
-  _NFTSlideShow_MoreText,
-  _NFTSlideShow_MoreTextLink,
-} from './index.styles';
-import Link from 'next/link';
+import { _NFTSlideShow } from './index.styles';
 
 type NFTSlideShowProps = {
   images: string[];
@@ -33,7 +19,8 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
   loadFunc,
   images,
 }) => {
-  const iconSize = '5rem';
+  const _ = _NFTSlideShow;
+  const iconSize = '3.5rem';
   const slideTime = 50;
 
   const [currentImagesIndex, setCurrentImagesIndex] = useState(0);
@@ -60,11 +47,11 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
 
   const clickBackButton = useCallback(
     (e?) => {
-      setPercent(0);
       // 自動スライドショー中にボタンが押されたら何もしない
       if (e && isPlay) return;
       if (disableBackButton()) return;
 
+      setPercent(0);
       setCurrentImagesIndex((prevIndex) => prevIndex - 1);
     },
     [disableBackButton, isPlay]
@@ -72,13 +59,12 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
 
   const clickNextButton = useCallback(
     (e?) => {
-      setPercent(0);
       // 自動スライドショー中にボタンが押されたら何もしない
       if (e && isPlay) return;
       if (disableNextButton()) return;
 
+      setPercent(0);
       setCurrentImagesIndex((prevIndex) => prevIndex + 1);
-
       // スライドが終わりそうだったらAPI叩く
       if (currentImagesIndex >= images.length - 5) {
         loadFunc();
@@ -114,74 +100,74 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
   }, slideTime);
 
   return (
-    <>
-      <_NFTSlideShow_Main>
-        <_NFTSlideShow_Container>
-          <_NFTSlideShow_CloseButtonWrapper>
-            <IoMdClose
-              onClick={releaseScroll}
-              size={'3rem'}
-              style={{ cursor: 'pointer' }}
-            />
-          </_NFTSlideShow_CloseButtonWrapper>
-          <_NFTSlideShow_ImageWrapper>
-            <_NFTSlideShow_ImageContainer>
-              <_NFTSlideShow_Image
-                alt='NFT'
-                src={images[currentImagesIndex]}
-                loading='lazy'
-              />
-            </_NFTSlideShow_ImageContainer>
-          </_NFTSlideShow_ImageWrapper>
-          <div style={{ height: '50%' }}>
-            <_NFTSlideShow_ArrowIconWrapper>
-              <_NFTSlideShow_ArrowIcon isActive={isPlay || disableBackButton()}>
-                <_NFTSlideShow_ArrowIconWrapper onClick={clickBackButton}>
-                  <IoIosArrowBack size={iconSize} color={'#fff'} />
-                </_NFTSlideShow_ArrowIconWrapper>
-              </_NFTSlideShow_ArrowIcon>
-              <_NFTSlideShow_AutoButtonContainer>
-                <div style={{ width: 300 }}>
-                  <Line strokeWidth={2} percent={percent} />
-                </div>
-                {isPlay ? (
-                  <BsStopFill
-                    onClick={clickPlayButton}
-                    size={'3rem'}
-                    style={{ cursor: 'pointer' }}
-                  />
-                ) : (
-                  <BsFillPlayFill
-                    onClick={clickPlayButton}
-                    size={'3rem'}
-                    style={{ cursor: 'pointer' }}
-                  />
-                )}
-              </_NFTSlideShow_AutoButtonContainer>
-              <_NFTSlideShow_ArrowIcon isActive={isPlay || disableNextButton()}>
-                <_NFTSlideShow_ArrowIconWrapper onClick={clickNextButton}>
-                  <IoIosArrowForward size={iconSize} color={'#fff'} />
-                </_NFTSlideShow_ArrowIconWrapper>
-              </_NFTSlideShow_ArrowIcon>
-            </_NFTSlideShow_ArrowIconWrapper>
+    <_.Main>
+      <_.Container>
+        <_.CloseButtonWrapper>
+          <IoMdClose
+            onClick={releaseScroll}
+            size={'3rem'}
+            style={{ cursor: 'pointer' }}
+          />
+        </_.CloseButtonWrapper>
 
-            <_NFTSlideShow_BottomContainer>
-              <_NFTSlideShow_BottomText>
-                HogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHoge
-              </_NFTSlideShow_BottomText>
-              <Link href={`/12878`} passHref>
-                <_NFTSlideShow_MoreTextLink
-                  onClick={stopAutoSlider}
-                  target='_blank'
-                >
-                  <_NFTSlideShow_MoreText>詳細を見る</_NFTSlideShow_MoreText>
-                </_NFTSlideShow_MoreTextLink>
-              </Link>
-            </_NFTSlideShow_BottomContainer>
-          </div>
-        </_NFTSlideShow_Container>
-      </_NFTSlideShow_Main>
-    </>
+        <_.ImageWrapper>
+          <_.ImageContainer>
+            <_.Image
+              alt='NFT'
+              src={images[currentImagesIndex]}
+              loading='lazy'
+            />
+          </_.ImageContainer>
+        </_.ImageWrapper>
+        <_.NFTNameWrapper>
+          <_.NFTNameContainer>
+            <_.NFTName>
+              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            </_.NFTName>
+            <Link href={`/12878`} passHref>
+              <_.MoreTextLink onClick={stopAutoSlider} target='_blank'>
+                <_.MoveDetailText>view the details</_.MoveDetailText>
+              </_.MoreTextLink>
+            </Link>
+          </_.NFTNameContainer>
+        </_.NFTNameWrapper>
+
+        <_.AutoButtonWrapper>
+          <_.AutoButtonContainer>
+            <_.Progress>
+              <Line strokeWidth={2} percent={percent} />
+            </_.Progress>
+            {isPlay ? (
+              <BsStopFill
+                onClick={clickPlayButton}
+                size={'3rem'}
+                style={{ cursor: 'pointer' }}
+              />
+            ) : (
+              <BsFillPlayFill
+                onClick={clickPlayButton}
+                size={'3rem'}
+                style={{ cursor: 'pointer' }}
+              />
+            )}
+          </_.AutoButtonContainer>
+        </_.AutoButtonWrapper>
+        <_.ArrowIconsWrapper>
+          <_.ArrowIconContainer>
+            <_.ArrowIcon isActive={isPlay || disableBackButton()}>
+              <_.ArrowIconWrapper onClick={clickBackButton}>
+                <IoIosArrowBack size={iconSize} color={'#fff'} />
+              </_.ArrowIconWrapper>
+            </_.ArrowIcon>
+            <_.ArrowIcon isActive={isPlay || disableNextButton()}>
+              <_.ArrowIconWrapper onClick={clickNextButton}>
+                <IoIosArrowForward size={iconSize} color={'#fff'} />
+              </_.ArrowIconWrapper>
+            </_.ArrowIcon>
+          </_.ArrowIconContainer>
+        </_.ArrowIconsWrapper>
+      </_.Container>
+    </_.Main>
   );
 };
 

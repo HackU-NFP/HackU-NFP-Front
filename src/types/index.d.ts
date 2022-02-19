@@ -1,2 +1,1 @@
-type LayoutType = 'gallery' | 'flex';
-type LayoutButtonType = LayoutType | 'slideShow'
+type LayoutType = 'gallery' | 'flex' | 'slideShow';
