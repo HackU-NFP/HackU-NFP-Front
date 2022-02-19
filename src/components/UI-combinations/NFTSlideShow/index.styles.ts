@@ -1,6 +1,4 @@
-import { loadDefaultErrorComponents } from "next/dist/server/load-components";
 import styled, { css } from "styled-components";
-import { breakpoints } from "styles";
 
 export const _NFTSlideShow_Main = styled.div`
   width: 100vw;
@@ -63,7 +61,11 @@ export const _NFTSlideShow_BottomContainer = styled.div`
   width: 100vw;
   height: 27%;
   background: #fff;
-
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: column;
+  padding-top: 0.7rem;
 `
 
 export const _NFTSlideShow_AutoButtonWrapper = styled.div`
@@ -77,4 +79,25 @@ export const _NFTSlideShow_AutoButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`
+
+export const _NFTSlideShow_BottomText = styled.div`
+  width: 95%;
+  font-size: 1.5rem;
+  line-height: initial;
+  text-align: center;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: none;
+`
+
+export const _NFTSlideShow_MoreText = styled.div`
+  cursor: pointer;
+  color: rgb(86, 86, 86);
+  user-select: none;
+
+  &:hover {
+    border-bottom: 1px solid #000;
+  }
 `

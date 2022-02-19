@@ -15,6 +15,8 @@ import {
   _NFTSlideShow_AutoButtonWrapper,
   _NFTSlideShow_AutoButtonContainer,
   _NFTSlideShow_ArrowIconWrapper,
+  _NFTSlideShow_BottomText,
+  _NFTSlideShow_MoreText,
 } from './index.styles';
 
 type NFTSlideShowProps = {
@@ -110,6 +112,25 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
                   <IoIosArrowBack size={iconSize} color={'#fff'} />
                 </_NFTSlideShow_ArrowIconWrapper>
               </_NFTSlideShow_ArrowIcon>
+              {isPlay ? (
+                <_NFTSlideShow_AutoButtonContainer>
+                  <BsStopFill
+                    onClick={clickPlayButton}
+                    size={'3rem'}
+                    style={{ cursor: 'pointer' }}
+                  />
+                  <div>During automatic slider...</div>
+                </_NFTSlideShow_AutoButtonContainer>
+              ) : (
+                <_NFTSlideShow_AutoButtonContainer>
+                  <BsFillPlayFill
+                    onClick={clickPlayButton}
+                    size={'3rem'}
+                    style={{ cursor: 'pointer' }}
+                  />
+                  <div>Automatic slider</div>
+                </_NFTSlideShow_AutoButtonContainer>
+              )}
               <_NFTSlideShow_ArrowIcon isActive={isPlay || disableNextButton()}>
                 <_NFTSlideShow_ArrowIconWrapper onClick={clickNextButton}>
                   <IoIosArrowForward size={iconSize} color={'#fff'} />
@@ -118,27 +139,10 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
             </_NFTSlideShow_ArrowIconWrapper>
 
             <_NFTSlideShow_BottomContainer>
-              <_NFTSlideShow_AutoButtonWrapper>
-                {isPlay ? (
-                  <_NFTSlideShow_AutoButtonContainer>
-                    <BsStopFill
-                      onClick={clickPlayButton}
-                      size={'3rem'}
-                      style={{ cursor: 'pointer' }}
-                    />
-                    <div>During automatic slider...</div>
-                  </_NFTSlideShow_AutoButtonContainer>
-                ) : (
-                  <_NFTSlideShow_AutoButtonContainer>
-                    <BsFillPlayFill
-                      onClick={clickPlayButton}
-                      size={'3rem'}
-                      style={{ cursor: 'pointer' }}
-                    />
-                    <div>Automatic slider</div>
-                  </_NFTSlideShow_AutoButtonContainer>
-                )}
-              </_NFTSlideShow_AutoButtonWrapper>
+              <_NFTSlideShow_BottomText>
+                HogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHoge
+              </_NFTSlideShow_BottomText>
+              <_NFTSlideShow_MoreText>詳細を見る</_NFTSlideShow_MoreText>
             </_NFTSlideShow_BottomContainer>
           </div>
         </_NFTSlideShow_Container>
