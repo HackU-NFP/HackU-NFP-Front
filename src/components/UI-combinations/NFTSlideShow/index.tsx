@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { IoMdClose, IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { BsFillPlayFill, BsStopFill } from 'react-icons/bs';
 import useInterval from 'use-interval';
+import { Line } from 'rc-progress';
 
 import {
   _NFTSlideShow_Main,
@@ -33,9 +34,11 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
   images,
 }) => {
   const iconSize = '5rem';
+  const slideTime = 50;
 
   const [currentImagesIndex, setCurrentImagesIndex] = useState(0);
   const [isPlay, setIsPlay] = useState(false);
+  const [percent, setPercent] = useState(0);
 
   const clickPlayButton = useCallback(() => {
     setIsPlay(!isPlay);
@@ -57,6 +60,7 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
 
   const clickBackButton = useCallback(
     (e?) => {
+      setPercent(0);
       // 自動スライドショー中にボタンが押されたら何もしない
       if (e && isPlay) return;
       if (disableBackButton()) return;
@@ -68,6 +72,7 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
 
   const clickNextButton = useCallback(
     (e?) => {
+      setPercent(0);
       // 自動スライドショー中にボタンが押されたら何もしない
       if (e && isPlay) return;
       if (disableNextButton()) return;
@@ -82,15 +87,31 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
     [currentImagesIndex, disableNextButton, images.length, isPlay, loadFunc]
   );
 
+  /**
+   * percentが100になったら自動スライドさせる。
+   * 定期実行
+   */
   useInterval(() => {
-    if (isPlay) {
+    if (!isPlay) return;
+    if (percent >= 100) {
+      setPercent(0);
       if (currentImagesIndex >= images.length - 1) {
         setIsPlay(false);
         return;
       }
       clickNextButton();
     }
-  }, 5000);
+  }, slideTime);
+
+  /**
+   * 5秒毎に実行させるようにしてる。
+   */
+  useInterval(() => {
+    if (isPlay) {
+      const newPercent = percent + 1;
+      setPercent(newPercent);
+    }
+  }, slideTime);
 
   return (
     <>
@@ -119,25 +140,24 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
                   <IoIosArrowBack size={iconSize} color={'#fff'} />
                 </_NFTSlideShow_ArrowIconWrapper>
               </_NFTSlideShow_ArrowIcon>
-              {isPlay ? (
-                <_NFTSlideShow_AutoButtonContainer>
+              <_NFTSlideShow_AutoButtonContainer>
+                <div style={{ width: 300 }}>
+                  <Line strokeWidth={2} percent={percent} />
+                </div>
+                {isPlay ? (
                   <BsStopFill
                     onClick={clickPlayButton}
                     size={'3rem'}
                     style={{ cursor: 'pointer' }}
                   />
-                  <div>During automatic slider...</div>
-                </_NFTSlideShow_AutoButtonContainer>
-              ) : (
-                <_NFTSlideShow_AutoButtonContainer>
+                ) : (
                   <BsFillPlayFill
                     onClick={clickPlayButton}
                     size={'3rem'}
                     style={{ cursor: 'pointer' }}
                   />
-                  <div>Automatic slider</div>
-                </_NFTSlideShow_AutoButtonContainer>
-              )}
+                )}
+              </_NFTSlideShow_AutoButtonContainer>
               <_NFTSlideShow_ArrowIcon isActive={isPlay || disableNextButton()}>
                 <_NFTSlideShow_ArrowIconWrapper onClick={clickNextButton}>
                   <IoIosArrowForward size={iconSize} color={'#fff'} />
