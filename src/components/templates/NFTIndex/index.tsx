@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import disableScroll from 'disable-scroll';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Grid } from 'react-loader-spinner';
 
@@ -12,49 +13,36 @@ import NFTGalleryIndex from 'components/UI-combinations/NFTGalleryIndex';
 import NFTFlexIndex from 'components/UI-combinations/NFTFlexIndex';
 import LayoutButton from 'components/UI/LayoutButton';
 import ScrollTopButton from 'components/UI/ScrollTopButton';
+import NFTSlideShow from 'components/UI-combinations/NFTSlideShow';
 
 const images = [
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/400/300?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/400/300?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/400/300?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
-  'https://picsum.photos/400/300?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/600/400?image=206',
-  'https://picsum.photos/200/300?image=1050',
-  'https://picsum.photos/300/300?image=206',
+  'https://picsum.photos/900/800?image=10',
+  'https://picsum.photos/900/1200?image=206',
+  'https://picsum.photos/900/800?image=201',
+  'https://picsum.photos/900/900?image=209',
+  'https://picsum.photos/900/800?image=1050',
 ];
-
-export type LayoutType = 'gallery' | 'flex';
 
 const NFTIndex = () => {
   const [layout, setLayout] = useState<LayoutType>('gallery');
+  const [isSlideShow, setIsSlideShow] = useState(false);
   const [items, setItems] = useState<string[]>([]);
 
   const layoutFunctions: {
-    [K in LayoutType]: React.MouseEventHandler<HTMLDivElement>;
+    [K in LayoutButtonType]: React.MouseEventHandler<HTMLDivElement>;
   } = {
     gallery: () => setLayout('gallery'),
     flex: () => setLayout('flex'),
+    slideShow: (e) => _disableScroll(),
+  };
+
+  const _disableScroll = () => {
+    setIsSlideShow(true);
+    disableScroll.on();
+  };
+  const releaseScroll = () => {
+    setIsSlideShow(false);
+    disableScroll.off();
   };
 
   function loadFunc() {
@@ -92,6 +80,13 @@ const NFTIndex = () => {
           </InfiniteScroll>
         </_NFTIndex_Container>
       </_NFTIndex_Main>
+      {isSlideShow && (
+        <NFTSlideShow
+          images={items}
+          loadFunc={loadFunc}
+          releaseScroll={releaseScroll}
+        />
+      )}
     </>
   );
 };

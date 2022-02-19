@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { LayoutType } from 'components/templates/NFTIndex';
 import LayoutFlex from 'components/UI/LayoutFlex';
 import NFTImage from 'components/UI/NFTImage';
 

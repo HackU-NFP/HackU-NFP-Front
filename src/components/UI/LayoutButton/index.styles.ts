@@ -1,8 +1,7 @@
-import { LayoutType } from "components/templates/NFTIndex";
 import styled, { css } from "styled-components";
 
 type _LayoutButton_Button_Props = {
-  isActive: boolean;
+  isActive?: boolean;
   isLeft?: boolean;
 }
 

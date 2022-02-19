@@ -1,4 +1,3 @@
-import { LayoutType } from 'components/templates/NFTIndex';
 import NFTImage from 'components/UI/NFTImage';
 import React from 'react';
 

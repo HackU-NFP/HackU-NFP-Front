@@ -1,4 +1,3 @@
-import { LayoutType } from 'components/templates/NFTIndex';
 import React from 'react';
 import {
   _NFTIndex_Figure,

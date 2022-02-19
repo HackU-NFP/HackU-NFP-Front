@@ -1,5 +1,4 @@
-import styled, { css } from "styled-components";
-import { LayoutType } from ".";
+import styled from "styled-components";
 
 export const _NFTIndex_Main = styled.div`
   max-width: 95%;

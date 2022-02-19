@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 
-import { LayoutType } from "components/templates/NFTIndex";
 import { breakpoints } from 'styles'
 
 export const _NFTIndex_ImageTextWrapper = styled.div`
@@ -38,6 +37,7 @@ export const _NFTIndex_Figure = styled.figure<{ layout: LayoutType }>`
       cursor: pointer;
       overflow: hidden;
       position: relative;
+      max-height: 500px;
     `
 
     return props.layout === 'gallery'

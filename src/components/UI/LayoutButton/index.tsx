@@ -1,13 +1,13 @@
-import { LayoutType } from 'components/templates/NFTIndex';
 import React from 'react';
 import { RiLayoutMasonryFill, RiLayoutGridFill } from 'react-icons/ri';
+import { BiSlideshow } from 'react-icons/bi';
 
 import { _LayoutButton_Button, _LayoutButton_Buttons } from './index.styles';
 
 type LayoutButtonProps = {
   layout: LayoutType;
   layoutFunctions: {
-    [K in LayoutType]: React.MouseEventHandler<HTMLDivElement>;
+    [K in LayoutButtonType]: React.MouseEventHandler<HTMLDivElement>;
   };
 };
 
@@ -38,6 +38,9 @@ const LayoutButton: React.FC<LayoutButtonProps> = ({
         isLeft={true}
       >
         <RiLayoutGridFill size={iconSize} color={iconColor('flex')} />
+      </_LayoutButton_Button>
+      <_LayoutButton_Button onClick={layoutFunctions.slideShow} isLeft={true}>
+        <BiSlideshow size={iconSize} />
       </_LayoutButton_Button>
     </_LayoutButton_Buttons>
   );
