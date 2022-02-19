@@ -16,11 +16,11 @@ import ScrollTopButton from 'components/UI/ScrollTopButton';
 import NFTSlideShow from 'components/UI-combinations/NFTSlideShow';
 
 const images = [
-  'https://picsum.photos/900/800?image=10',
-  'https://picsum.photos/900/1200?image=206',
-  'https://picsum.photos/900/800?image=201',
-  'https://picsum.photos/900/900?image=209',
-  'https://picsum.photos/900/800?image=1050',
+  'https://picsum.photos/900/900?image=10',
+  'https://picsum.photos/300/300?image=206',
+  'https://picsum.photos/500/500?image=201',
+  'https://picsum.photos/700/900?image=209',
+  'https://picsum.photos/800/800?image=1050',
 ];
 
 const NFTIndex = () => {
@@ -29,7 +29,7 @@ const NFTIndex = () => {
   const [items, setItems] = useState<string[]>([]);
 
   const layoutFunctions: {
-    [K in LayoutButtonType]: React.MouseEventHandler<HTMLDivElement>;
+    [K in LayoutType]: React.MouseEventHandler<HTMLDivElement>;
   } = {
     gallery: () => setLayout('gallery'),
     flex: () => setLayout('flex'),
