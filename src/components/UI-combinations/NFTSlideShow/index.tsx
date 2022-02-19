@@ -17,7 +17,9 @@ import {
   _NFTSlideShow_ArrowIconWrapper,
   _NFTSlideShow_BottomText,
   _NFTSlideShow_MoreText,
+  _NFTSlideShow_MoreTextLink,
 } from './index.styles';
+import Link from 'next/link';
 
 type NFTSlideShowProps = {
   images: string[];
@@ -37,6 +39,12 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
 
   const clickPlayButton = useCallback(() => {
     setIsPlay(!isPlay);
+  }, [isPlay]);
+
+  const stopAutoSlider = useCallback(() => {
+    if (isPlay) {
+      setIsPlay(false);
+    }
   }, [isPlay]);
 
   const disableBackButton = useCallback(() => {
@@ -75,7 +83,6 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
   );
 
   useInterval(() => {
-    console.log('OK');
     if (isPlay) {
       if (currentImagesIndex >= images.length - 1) {
         setIsPlay(false);
@@ -142,7 +149,14 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
               <_NFTSlideShow_BottomText>
                 HogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHoge
               </_NFTSlideShow_BottomText>
-              <_NFTSlideShow_MoreText>詳細を見る</_NFTSlideShow_MoreText>
+              <Link href={`/12878`} passHref>
+                <_NFTSlideShow_MoreTextLink
+                  onClick={stopAutoSlider}
+                  target='_blank'
+                >
+                  <_NFTSlideShow_MoreText>詳細を見る</_NFTSlideShow_MoreText>
+                </_NFTSlideShow_MoreTextLink>
+              </Link>
             </_NFTSlideShow_BottomContainer>
           </div>
         </_NFTSlideShow_Container>

@@ -92,6 +92,10 @@ export const _NFTSlideShow_BottomText = styled.div`
   user-select: none;
 `
 
+export const _NFTSlideShow_MoreTextLink = styled.a`
+  text-decoration: none;
+`
+
 export const _NFTSlideShow_MoreText = styled.div`
   cursor: pointer;
   color: rgb(86, 86, 86);
