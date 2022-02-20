@@ -15,17 +15,50 @@ export const _NFTSlideShow = {
   `,
   ImageWrapper: styled.div`
     width: 100%;
-    height: 65%;
+    height: 75%;
     position: absolute;
     top: 50px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
   `,
   ImageContainer: styled.div`
+    max-width: 95%;
+    margin: 0 auto;
+    position: relative;
+  `,
+  Image: styled.img`
+    max-width: 100%;
+    max-height: 100%;
+    user-select: none;
+    pointer-events: none;
+  `,
+  ImageTextWrapper: styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 95%;
+    position: absolute;
+    top:0;
+    left:0;
+    opacity: 0;
+    width: 100%;
     height: 100%;
-    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.7);
+    transition: 0.3s;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 4;
+    }
+  `,
+  ImageText: styled.span`
+    max-width: 90%;
+    line-height: initial;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   `,
   NFTNameWrapper: styled.div`
     position: absolute;
@@ -45,6 +78,7 @@ export const _NFTSlideShow = {
     text-align: center;
     overflow-x: hidden;
     text-overflow: ellipsis;
+    line-height: 1.3;
   `,
   MoveDetailText: styled.div`
     cursor: pointer;
@@ -58,13 +92,6 @@ export const _NFTSlideShow = {
     display: flex;
     justify-content: flex-end;
     z-index: 100;
-  `,
-  Image: styled.img`
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-    user-select: none;
-    pointer-events: none;
   `,
   ArrowIconWrapper: styled.div`
     display: flex;

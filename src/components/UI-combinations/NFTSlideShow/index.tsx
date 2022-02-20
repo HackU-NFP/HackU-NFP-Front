@@ -9,7 +9,7 @@ import { Line } from 'rc-progress';
 import { _NFTSlideShow } from './index.styles';
 
 type NFTSlideShowProps = {
-  images: string[];
+  tokens: Token[];
   loadFunc: () => void;
   releaseScroll: () => void;
 };
@@ -17,7 +17,7 @@ type NFTSlideShowProps = {
 const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
   releaseScroll,
   loadFunc,
-  images,
+  tokens,
 }) => {
   const _ = _NFTSlideShow;
   const iconSize = '3.5rem';
@@ -42,8 +42,8 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
   }, [currentImagesIndex]);
 
   const disableNextButton = useCallback(() => {
-    return currentImagesIndex >= images.length - 1;
-  }, [currentImagesIndex, images.length]);
+    return currentImagesIndex >= tokens.length - 1;
+  }, [currentImagesIndex, tokens.length]);
 
   const clickBackButton = useCallback(
     (e?) => {
@@ -66,11 +66,11 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
       setPercent(0);
       setCurrentImagesIndex((prevIndex) => prevIndex + 1);
       // スライドが終わりそうだったらAPI叩く
-      if (currentImagesIndex >= images.length - 5) {
-        loadFunc();
-      }
+      // if (currentImagesIndex === tokens.length - 1) {
+      //   loadFunc();
+      // }
     },
-    [currentImagesIndex, disableNextButton, images.length, isPlay, loadFunc]
+    [currentImagesIndex, disableNextButton, tokens.length, isPlay, loadFunc]
   );
 
   /**
@@ -81,7 +81,7 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
     if (!isPlay) return;
     if (percent >= 100) {
       setPercent(0);
-      if (currentImagesIndex >= images.length - 1) {
+      if (currentImagesIndex >= tokens.length - 1) {
         setIsPlay(false);
         return;
       }
@@ -112,25 +112,40 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
 
         <_.ImageWrapper>
           <_.ImageContainer>
+            <Link href={`/${tokens[currentImagesIndex].tokenType}`} passHref>
+              <_.MoreTextLink onClick={stopAutoSlider} target='_blank'>
+                <_.Image
+                  alt='NFT'
+                  src={`${process.env.NEXT_PUBLIC_GCP_STORAGE}${tokens[currentImagesIndex].tokenType}`}
+                  loading='lazy'
+                />
+                <_.ImageTextWrapper>
+                  <_.ImageText>{tokens[currentImagesIndex].name}</_.ImageText>
+                </_.ImageTextWrapper>
+              </_.MoreTextLink>
+            </Link>
+          </_.ImageContainer>
+        </_.ImageWrapper>
+
+        {/* <_.ImageWrapper>
+          <_.ImageContainer>
             <_.Image
               alt='NFT'
-              src={images[currentImagesIndex]}
+              src={`${process.env.NEXT_PUBLIC_GCP_STORAGE}${tokens[currentImagesIndex].tokenType}`}
               loading='lazy'
             />
           </_.ImageContainer>
         </_.ImageWrapper>
         <_.NFTNameWrapper>
           <_.NFTNameContainer>
-            <_.NFTName>
-              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            </_.NFTName>
-            <Link href={`/12878`} passHref>
+            <_.NFTName>{tokens[currentImagesIndex].name}</_.NFTName>
+            <Link href={`/${tokens[currentImagesIndex].tokenType}`} passHref>
               <_.MoreTextLink onClick={stopAutoSlider} target='_blank'>
                 <_.MoveDetailText>view the details</_.MoveDetailText>
               </_.MoreTextLink>
             </Link>
           </_.NFTNameContainer>
-        </_.NFTNameWrapper>
+        </_.NFTNameWrapper> */}
 
         <_.AutoButtonWrapper>
           <_.AutoButtonContainer>

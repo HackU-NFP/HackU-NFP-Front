@@ -1,4 +1,7 @@
+import { ShowNFT } from 'api/nft';
 import Head from 'components/UI/Head';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const _NFTShow_Main = styled.div`
@@ -37,20 +40,47 @@ const _NFTShow_Describe = styled.div`
 `;
 
 const NFTShow = () => {
+  const router = useRouter();
+  const query = router.query;
+
+  const [token, setToken] = useState<Token | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const getToken = async () => {
+    const id = query.id as string | undefined;
+    if (id === undefined) return;
+
+    const response = await ShowNFT(id);
+    if (response.data.statusCode === 4045) {
+      return;
+    }
+
+    setToken(response.data.responseData);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getToken();
+  }, [query, router]);
+
   return (
     <>
-      <Head title='Smart Mint - 1' />
-      <_NFTShow_Main>
-        <_NFTShow_Figure>
-          <_NFTShow_Image src='https://picsum.photos/990/990?image=10' />
-        </_NFTShow_Figure>
-        <_NFTShow_TextsWrapper>
-          <_NFTShow_Title>HogeHogeHogeHogeHogeHogeHoge</_NFTShow_Title>
-          <_NFTShow_Describe>
-            HogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHogeHoge
-          </_NFTShow_Describe>
-        </_NFTShow_TextsWrapper>
-      </_NFTShow_Main>
+      {!loading && token && (
+        <>
+          <Head title='Smart Mint - 1' />
+          <_NFTShow_Main>
+            <_NFTShow_Figure>
+              <_NFTShow_Image
+                src={`${process.env.NEXT_PUBLIC_GCP_STORAGE}${token.tokenType}`}
+              />
+            </_NFTShow_Figure>
+            <_NFTShow_TextsWrapper>
+              <_NFTShow_Title>{token.name}</_NFTShow_Title>
+              <_NFTShow_Describe>{token.meta}</_NFTShow_Describe>
+            </_NFTShow_TextsWrapper>
+          </_NFTShow_Main>
+        </>
+      )}
     </>
   );
 };
