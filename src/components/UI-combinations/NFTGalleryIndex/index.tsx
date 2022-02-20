@@ -5,16 +5,19 @@ import React from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
 type NFTGalleryIndexProps = {
-  items: string[];
+  tokens: Token[];
   layout: LayoutType;
 };
 
-const NFTGalleryIndex: React.FC<NFTGalleryIndexProps> = ({ items, layout }) => {
+const NFTGalleryIndex: React.FC<NFTGalleryIndexProps> = ({
+  tokens,
+  layout,
+}) => {
   return (
     <ResponsiveMasonry columnsCountBreakPoints={{ 550: 2, 800: 3, 1200: 6 }}>
       <Masonry gutter='10px'>
-        {items.map((image, i) => (
-          <NFTImage image={image} layout={layout} key={i} />
+        {tokens.map((token, i) => (
+          <NFTImage token={token} layout={layout} key={i} />
         ))}
       </Masonry>
     </ResponsiveMasonry>

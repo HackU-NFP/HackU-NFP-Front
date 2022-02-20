@@ -4,15 +4,15 @@ import LayoutFlex from 'components/UI/LayoutFlex';
 import NFTImage from 'components/UI/NFTImage';
 
 type NFTFlexIndexProps = {
-  items: string[];
+  tokens: Token[];
   layout: LayoutType;
 };
 
-const NFTFlexIndex: React.FC<NFTFlexIndexProps> = ({ items, layout }) => {
+const NFTFlexIndex: React.FC<NFTFlexIndexProps> = ({ tokens, layout }) => {
   return (
     <LayoutFlex gap='small' justify='space-between'>
-      {items.map((image, i) => (
-        <NFTImage image={image} layout={layout} key={i} />
+      {tokens.map((token, i) => (
+        <NFTImage token={token} layout={layout} key={i} />
       ))}
     </LayoutFlex>
   );

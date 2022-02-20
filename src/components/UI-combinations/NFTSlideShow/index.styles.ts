@@ -45,6 +45,7 @@ export const _NFTSlideShow = {
     text-align: center;
     overflow-x: hidden;
     text-overflow: ellipsis;
+    line-height: 1.3;
   `,
   MoveDetailText: styled.div`
     cursor: pointer;
