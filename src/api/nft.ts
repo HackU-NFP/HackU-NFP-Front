@@ -10,9 +10,12 @@ export const IndexNFT = async (params: queryParameter) => {
   const response: AxiosResponse<IndexNFTResponse> = await axios.get(
     `/api/proxy/v1/item-tokens/${process.env.NEXT_PUBLIC_CONTRACTID}/non-fungibles`,
     {
-      baseURL: 'https://smart-mint.vercel.app/',
       params,
-      headers
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json',
+        Host: 'test-api.blockchain.line.me'
+      }
     }
   );
   return response
@@ -25,7 +28,11 @@ export const ShowNFT = async (tokenType: string) => {
   const response: AxiosResponse<ShowNFTResponse> = await axios.get(
     `/api/proxy/v1/item-tokens/${process.env.NEXT_PUBLIC_CONTRACTID}/non-fungibles/${tokenType}`,
     {
-      headers
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json',
+        Host: 'test-api.blockchain.line.me'
+      }
     }
   );
   return response
