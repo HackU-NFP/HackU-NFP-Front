@@ -8,6 +8,7 @@ export default class SignatureGenerator {
    * parameters is query-parameters
    * body is request body of POST, PUT method
    */
+
   static signature(
     apiSecret,
     method,
@@ -17,6 +18,12 @@ export default class SignatureGenerator {
     parameters = {},
     body = {}
   ) {
+    console.log(apiSecret);
+    console.log(method);
+    console.log(path);
+    console.log(timestamp);
+    console.log(nonce);
+    console.log(parameters);
     let obj = _.assignIn(parameters, body);
     function createSignTarget() {
       let signTarget = `${nonce}${timestamp}${method}${path}`;
