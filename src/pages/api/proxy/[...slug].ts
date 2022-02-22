@@ -1,20 +1,22 @@
-import { IncomingMessage, ServerResponse } from 'http'
-import httpProxy from 'http-proxy';
+import { NextApiRequest, NextApiResponse } from 'next';
+import httpProxyMiddleware from 'next-http-proxy-middleware';
 
-const target = process.env.NEXT_PUBLIC_LINE_BLOCK_CHAIN_API
-const proxy = httpProxy.createProxyServer({ target, changeOrigin: true });
+const target = process.env.NEXT_PUBLIC_LINE_BLOCK_CHAIN_API;
 
-export default async function handler (req: IncomingMessage, res: ServerResponse) {
-  req.url = req.url!.replace(new RegExp("^/api/proxy"), "")
+export const config = {
+  api: {
+    externalResolver: true,
+  },
+};
 
-  return new Promise((resolve, reject) => {
-    try {
-      proxy.web(req, res, { proxyTimeout: 5000 }, (e) => {
-        reject(e)
-      })
-      resolve
-    } catch (e) {
-      reject(e)
-    }
-  })
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  httpProxyMiddleware(req, res, {
+    target: target,
+    pathRewrite: [
+      {
+        patternStr: `^/api/proxy`,
+        replaceStr: '',
+      },
+    ],
+  });
 }

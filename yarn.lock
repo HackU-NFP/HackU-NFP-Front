@@ -288,6 +288,13 @@
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
 
+"@types/http-proxy@1.17.3":
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/@types/http-proxy/-/http-proxy-1.17.3.tgz#348e1b808ff9585423cb909e9992d89ccdbf4c14"
+  integrity sha512-wIPqXANye5BbORbuh74exbwNzj+UWCwWyeEFJzUQ7Fq3W2NSAy+7x7nX1fgbEypr2/TdKqpeuxLnXWgzN533/Q==
+  dependencies:
+    "@types/node" "*"
+
 "@types/http-proxy@^1.17.8":
   version "1.17.8"
   resolved "https://registry.yarnpkg.com/@types/http-proxy/-/http-proxy-1.17.8.tgz#968c66903e7e42b483608030ee85800f22d03f55"
@@ -1543,6 +1550,14 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
+
+next-http-proxy-middleware@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/next-http-proxy-middleware/-/next-http-proxy-middleware-1.2.2.tgz#84915e51a7c5b660df358afb3ac77deef5da9196"
+  integrity sha512-LnI61nHPN++uD2hOiybWHS58YnF3OXggkiLL9jHeEDBATK0oH2NTQmdj5/crmiuibKbf5kB4SLFgHy/PDQXvLw==
+  dependencies:
+    "@types/http-proxy" "1.17.3"
+    http-proxy "^1.18.1"
 
 next@12.0.10:
   version "12.0.10"
