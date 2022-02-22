@@ -1,7 +1,7 @@
-import SignatureGenerator from "./signature-generator";
+import SignatureGenerator from './signature-generator';
 
-export const createHeader = (path: string, p?: queryParameter) => {
-  const serviceApiKey = process.env.NEXT_PUBLIC_SERVICE_API_KEY as string
+export const createHeader = (path: string, p?: any) => {
+  const serviceApiKey = process.env.NEXT_PUBLIC_SERVICE_API_KEY as string;
   const timestamp = createTimestamp();
   const nonce = createRandomStr();
   const signature = SignatureGenerator.signature(
@@ -14,14 +14,13 @@ export const createHeader = (path: string, p?: queryParameter) => {
     // body = {})
   );
 
-
   return {
     'service-api-key': serviceApiKey,
     nonce,
     timestamp,
-    signature
-  }
-}
+    signature,
+  };
+};
 
 const createRandomStr = () => {
   const chars =

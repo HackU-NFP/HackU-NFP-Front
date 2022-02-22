@@ -3,37 +3,19 @@ import axios, { AxiosResponse } from 'axios';
 import { createHeader } from 'libs/create-header';
 
 export const IndexNFT = async (params: queryParameter) => {
-  const headers = createHeader(
-    `/v1/item-tokens/${process.env.NEXT_PUBLIC_CONTRACTID}/non-fungibles`,
-    params
-  );
   const response: AxiosResponse<IndexNFTResponse> = await axios.get(
-    `/api/proxy/v1/item-tokens/${process.env.NEXT_PUBLIC_CONTRACTID}/non-fungibles`,
+    `/api/nfts`,
     {
       params,
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json',
-        Host: 'test-api.blockchain.line.me'
-      }
     }
   );
-  return response
-}
+  return response;
+};
 
 export const ShowNFT = async (tokenType: string) => {
-  const headers = createHeader(
-    `/v1/item-tokens/${process.env.NEXT_PUBLIC_CONTRACTID}/non-fungibles/${tokenType}`
+  const response: AxiosResponse<IndexNFTResponse> = await axios.get(
+    `/api/nft?tokenType=${tokenType}`
   );
-  const response: AxiosResponse<ShowNFTResponse> = await axios.get(
-    `/api/proxy/v1/item-tokens/${process.env.NEXT_PUBLIC_CONTRACTID}/non-fungibles/${tokenType}`,
-    {
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json',
-        Host: 'test-api.blockchain.line.me'
-      }
-    }
-  );
-  return response
-}
+
+  return response;
+};
