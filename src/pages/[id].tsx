@@ -48,14 +48,15 @@ const NFTShow = () => {
 
   const getToken = async () => {
     const id = query.id as string | undefined;
+    const contractId = process.env.NEXT_PUBLIC_CONTRACTID as string;
     if (id === undefined) return;
 
-    const response = await ShowNFT(id);
-    if (response.data.statusCode === 4045) {
-      return;
-    }
+    const response = await ShowNFT(contractId, id);
+    // if (response.data.statusCode === 4045) {
+    //   return;
+    // }
 
-    setToken(response.data.responseData);
+    setToken(response.data);
     setLoading(false);
   };
 

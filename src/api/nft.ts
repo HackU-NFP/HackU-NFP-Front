@@ -1,39 +1,27 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { createHeader } from 'libs/create-header';
+const baseUri = 'https://hacku-nfp-server-j5waslslpa-an.a.run.app';
 
 export const IndexNFT = async (params: queryParameter) => {
-  const headers = createHeader(
-    `/v1/item-tokens/${process.env.NEXT_PUBLIC_CONTRACTID}/non-fungibles`,
-    params
-  );
   const response: AxiosResponse<IndexNFTResponse> = await axios.get(
-    `/api/proxy/v1/item-tokens/${process.env.NEXT_PUBLIC_CONTRACTID}/non-fungibles`,
+    `${baseUri}/api/nfts`,
     {
       params,
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json',
-        Host: 'test-api.blockchain.line.me'
-      }
     }
   );
-  return response
-}
+  return response;
+};
 
-export const ShowNFT = async (tokenType: string) => {
-  const headers = createHeader(
-    `/v1/item-tokens/${process.env.NEXT_PUBLIC_CONTRACTID}/non-fungibles/${tokenType}`
-  );
+export const ShowNFT = async (constractId: string, tokenType: string) => {
   const response: AxiosResponse<ShowNFTResponse> = await axios.get(
-    `/api/proxy/v1/item-tokens/${process.env.NEXT_PUBLIC_CONTRACTID}/non-fungibles/${tokenType}`,
+    `${baseUri}/api/nft`,
+
     {
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json',
-        Host: 'test-api.blockchain.line.me'
-      }
+      params: {
+        contractId: constractId,
+        tokenType: tokenType,
+      },
     }
   );
-  return response
-}
+  return response;
+};

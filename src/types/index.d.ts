@@ -1,10 +1,11 @@
 type LayoutType = 'gallery' | 'flex' | 'slideShow';
 
 type queryParameter = {
+  contractId: string;
   limit: number;
   orderBy: string;
   page: number;
-}
+};
 
 type Token = {
   createdAt: number;
@@ -16,16 +17,6 @@ type Token = {
   totalSupply: string;
 };
 
-interface IndexNFTResponse {
-  responseData: Token[];
-  responseTime: number;
-  statusCode: number;
-  statusMessage: string;
-}
+type IndexNFTResponse = Token[];
 
-interface ShowNFTResponse {
-  responseData: Token;
-  responseTime: number;
-  statusCode: number;
-  statusMessage: string;
-}
+type ShowNFTResponse = Token;

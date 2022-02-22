@@ -25,6 +25,7 @@ const images = [
 ];
 
 const NFTIndex = () => {
+  const contractId = process.env.NEXT_PUBLIC_CONTRACTID as string;
   const limit = 50;
   const orderBy = 'desc';
 
@@ -36,18 +37,19 @@ const NFTIndex = () => {
 
   const getTokens = async () => {
     const queryParameter = {
+      contractId,
       limit,
       orderBy,
       page,
     };
 
     const response = await IndexNFT(queryParameter);
-    if (response.data.responseData.length === 0) {
+    if (response.data.length === 0) {
       setLoading(false);
       return;
     }
 
-    setTokens(tokens.concat(...response.data.responseData));
+    setTokens(tokens.concat(...response.data));
     setPage((page) => page + 1);
     setLoading(false);
   };
