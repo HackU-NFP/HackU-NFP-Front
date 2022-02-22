@@ -13,7 +13,7 @@ export const IndexNFT = async (params: queryParameter) => {
 };
 
 export const ShowNFT = async (tokenType: string) => {
-  const response: AxiosResponse<IndexNFTResponse> = await axios.get(
+  const response: AxiosResponse<ShowNFTResponse> = await axios.get(
     `/api/nft?tokenType=${tokenType}`
   );
 
