@@ -1,14 +1,17 @@
-import Link from 'next/link';
 import React from 'react';
-import { _Header, _Header_Logo } from './index.styles';
+import Link from 'next/link';
+
+import { _Header } from './index.styles';
 
 const Header = () => {
+  const _ = _Header;
+
   return (
-    <_Header>
+    <_.Header>
       <Link href={'/'} passHref>
-        <_Header_Logo>すまーとみんと</_Header_Logo>
+        <_.Logo>すまーとみんと</_.Logo>
       </Link>
-    </_Header>
+    </_.Header>
   );
 };
 

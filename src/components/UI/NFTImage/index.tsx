@@ -10,12 +10,11 @@ import {
 type NFTImageProps = {
   token: Token;
   layout: LayoutType;
-  key: number;
 };
 
-const NFTImage: React.FC<NFTImageProps> = ({ token, layout, key }) => {
+const NFTImage: React.FC<NFTImageProps> = ({ token, layout }) => {
   return (
-    <_NFTImage_Figure layout={layout} key={key}>
+    <_NFTImage_Figure layout={layout}>
       <Link href={`/${token.tokenType}`} passHref>
         <a target='_blank'>
           <_NFTImage_Image

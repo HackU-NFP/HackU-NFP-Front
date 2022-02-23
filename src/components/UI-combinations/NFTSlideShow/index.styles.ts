@@ -6,7 +6,7 @@ export const _NFTSlideShow = {
     width: 100vw;
     height: 100%;
     background-color: rgba(255,255,255, 0.9);
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 3;
@@ -30,7 +30,7 @@ export const _NFTSlideShow = {
   `,
   Image: styled.img`
     max-width: 100%;
-    max-height: 500px;
+    max-height: 400px;
     user-select: none;
     pointer-events: none;
 
