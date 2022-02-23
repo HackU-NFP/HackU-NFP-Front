@@ -127,26 +127,6 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
           </_.ImageContainer>
         </_.ImageWrapper>
 
-        {/* <_.ImageWrapper>
-          <_.ImageContainer>
-            <_.Image
-              alt='NFT'
-              src={`${process.env.NEXT_PUBLIC_GCP_STORAGE}${tokens[currentImagesIndex].tokenType}`}
-              loading='lazy'
-            />
-          </_.ImageContainer>
-        </_.ImageWrapper>
-        <_.NFTNameWrapper>
-          <_.NFTNameContainer>
-            <_.NFTName>{tokens[currentImagesIndex].name}</_.NFTName>
-            <Link href={`/${tokens[currentImagesIndex].tokenType}`} passHref>
-              <_.MoreTextLink onClick={stopAutoSlider} target='_blank'>
-                <_.MoveDetailText>view the details</_.MoveDetailText>
-              </_.MoreTextLink>
-            </Link>
-          </_.NFTNameContainer>
-        </_.NFTNameWrapper> */}
-
         <_.AutoButtonWrapper>
           <_.AutoButtonContainer>
             <_.Progress>

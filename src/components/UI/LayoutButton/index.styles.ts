@@ -8,9 +8,6 @@ type _LayoutButton_Button_Props = {
 export const _LayoutButton_Buttons = styled.div`
   display: flex;
   justify-content: flex-end;
-  /* position: sticky;
-  top: 10px;
-  z-index: 2; */
 `
 
 export const _LayoutButton_Button = styled.div<_LayoutButton_Button_Props>`
