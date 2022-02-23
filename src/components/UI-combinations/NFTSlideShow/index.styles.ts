@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { breakpoints } from "styles";
 
 export const _NFTSlideShow = {
   Main: styled.div`
@@ -29,9 +30,13 @@ export const _NFTSlideShow = {
   `,
   Image: styled.img`
     max-width: 100%;
-    max-height: 100%;
+    max-height: 500px;
     user-select: none;
     pointer-events: none;
+
+    @media ${breakpoints.sm} {
+      max-height: 600px;
+    }
   `,
   ImageTextWrapper: styled.div`
     display: flex;

@@ -4,7 +4,7 @@ import Head from 'components/UI/Head';
 const Home = () => {
   return (
     <>
-      <Head title='Smart Mint' />
+      <Head title='すまーとみんと' />
       <NFTIndex />
     </>
   );
