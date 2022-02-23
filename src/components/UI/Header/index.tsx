@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <_Header>
       <Link href={'/'} passHref>
-        <_Header_Logo>Smart Mint</_Header_Logo>
+        <_Header_Logo>すまーとみんと</_Header_Logo>
       </Link>
     </_Header>
   );

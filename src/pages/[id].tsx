@@ -68,7 +68,7 @@ const NFTShow = () => {
     <>
       {!loading && token && (
         <>
-          <Head title='Smart Mint - 1' />
+          <Head title={`すまーとみんと - ${token.name}`} />
           <_NFTShow_Main>
             <_NFTShow_Figure>
               <_NFTShow_Image
