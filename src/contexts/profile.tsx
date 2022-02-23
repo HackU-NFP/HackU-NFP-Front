@@ -61,7 +61,7 @@ const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
       const liff = (await import('@line/liff')).default;
 
       // liffの初期化
-      await liff.init({ liffId: '1656916895-BKvgYlw8' });
+      await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID as string });
 
       // liffで開かれていたら
       if (liff.isInClient()) {
