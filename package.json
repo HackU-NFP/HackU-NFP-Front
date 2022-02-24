@@ -15,7 +15,7 @@
     "disable-scroll": "^0.6.0",
     "http-proxy": "^1.18.1",
     "lodash": "^4.17.21",
-    "next": "12.0.10",
+    "next": "12.1.0",
     "rc-progress": "^3.2.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
