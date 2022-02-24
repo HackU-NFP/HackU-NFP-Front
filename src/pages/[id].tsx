@@ -26,7 +26,6 @@ const _NFTShow_Image = styled.img`
 const _NFTShow_TextsWrapper = styled.div`
   max-width: 70%;
   margin: 0 auto;
-  padding: 0.5rem;
 `;
 const _NFTShow_Title = styled.div`
   text-align: center;
