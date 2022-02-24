@@ -41,6 +41,7 @@ const NFTIndex = () => {
   const [page, setPage] = useState(1);
   const [isLoadFinish, setIsLoadFinish] = useState(false);
   const [isFilter, setIsFilter] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [currentFilter, setCurrentFilter] = useState<FillterName>('ALL');
 
   useEffect(() => {
@@ -62,10 +63,7 @@ const NFTIndex = () => {
 
   const callIndexUserNFT = async (queryParameter: queryParameter) => {
     const userId = profile.profile?.userId as string;
-    const response = await IndexUserNFT(
-      'Ufb6fddf5423d568bb8f2a810c180cb5a',
-      queryParameter
-    );
+    const response = await IndexUserNFT(userId, queryParameter);
 
     if (response.data.length === 0) {
       setIsLoadFinish(true);
@@ -98,6 +96,7 @@ const NFTIndex = () => {
 
     setTokens(tokens.concat(...response.data));
     setPage((page) => page + 1);
+    setLoading(false);
   };
 
   const readMore = async () => {
@@ -164,7 +163,11 @@ const NFTIndex = () => {
     flex: useCallback(() => {
       setLayout('flex');
     }, []),
-    slideShow: (e) => _disableScroll(),
+    slideShow: (e) => {
+      if (tokens.length) {
+        _disableScroll();
+      }
+    },
   };
 
   const _disableScroll = () => {
@@ -187,53 +190,58 @@ const NFTIndex = () => {
 
   return (
     <>
-      <_.Main>
-        <ScrollTopButton />
-        {isLiff ? (
-          <_.ButtonContainer>
-            <_.FilterButton ref={refEle} onClick={() => setIsFilter(!isFilter)}>
-              <BsFilter size={'2.3rem'} />
-            </_.FilterButton>
-            {isFilter && (
-              <_.FilterContainer>
-                <_.FilterTextWrapper onClick={() => changeFillter('ALL')}>
-                  <_.FilterText>All NFT</_.FilterText>
-                  {currentFilter === 'ALL' && <BsCheck2 size={'2rem'} />}
-                </_.FilterTextWrapper>
-                <_.FilterTextWrapper
-                  onClick={() => changeFillter('MY')}
-                  border={true}
-                >
-                  <_.FilterText>My NFT</_.FilterText>
-                  {currentFilter === 'MY' && <BsCheck2 size={'2rem'} />}
-                </_.FilterTextWrapper>
-              </_.FilterContainer>
-            )}
-            <LayoutButton layoutFunctions={layoutFunctions} layout={layout} />
-          </_.ButtonContainer>
-        ) : (
-          <LayoutButton layoutFunctions={layoutFunctions} layout={layout} />
-        )}
-        {tokens.length !== 0 ? (
-          <_.Container>
-            {layout === 'gallery' && (
-              <NFTGalleryIndex tokens={tokens} layout={layout} />
-            )}
-            {layout === 'flex' && (
-              <NFTFlexIndex tokens={tokens} layout={layout} />
-            )}
-            <_.BottomTextContainer>
-              {isLoadFinish ? (
-                <_.NoMoerText>No more</_.NoMoerText>
-              ) : (
-                <_.ReadMoreText onClick={readMore}>Read more</_.ReadMoreText>
+      {!loading && (
+        <_.Main>
+          <ScrollTopButton />
+          {isLiff ? (
+            <_.ButtonContainer>
+              <_.FilterButton
+                ref={refEle}
+                onClick={() => setIsFilter(!isFilter)}
+              >
+                <BsFilter size={'2.3rem'} />
+              </_.FilterButton>
+              {isFilter && (
+                <_.FilterContainer>
+                  <_.FilterTextWrapper onClick={() => changeFillter('ALL')}>
+                    <_.FilterText>All NFT</_.FilterText>
+                    {currentFilter === 'ALL' && <BsCheck2 size={'2rem'} />}
+                  </_.FilterTextWrapper>
+                  <_.FilterTextWrapper
+                    onClick={() => changeFillter('MY')}
+                    border={true}
+                  >
+                    <_.FilterText>My NFT</_.FilterText>
+                    {currentFilter === 'MY' && <BsCheck2 size={'2rem'} />}
+                  </_.FilterTextWrapper>
+                </_.FilterContainer>
               )}
-            </_.BottomTextContainer>
-          </_.Container>
-        ) : (
-          <div>Not NFT</div>
-        )}
-      </_.Main>
+              <LayoutButton layoutFunctions={layoutFunctions} layout={layout} />
+            </_.ButtonContainer>
+          ) : (
+            <LayoutButton layoutFunctions={layoutFunctions} layout={layout} />
+          )}
+          {tokens.length !== 0 ? (
+            <_.Container>
+              {layout === 'gallery' && (
+                <NFTGalleryIndex tokens={tokens} layout={layout} />
+              )}
+              {layout === 'flex' && (
+                <NFTFlexIndex tokens={tokens} layout={layout} />
+              )}
+              <_.BottomTextContainer>
+                {isLoadFinish ? (
+                  <_.NoMoerText>No more</_.NoMoerText>
+                ) : (
+                  <_.ReadMoreText onClick={readMore}>Read more</_.ReadMoreText>
+                )}
+              </_.BottomTextContainer>
+            </_.Container>
+          ) : (
+            <_.NotNFTText>NFT does not exist.</_.NotNFTText>
+          )}
+        </_.Main>
+      )}
       {isSlideShow && (
         <NFTSlideShow tokens={tokens} releaseScroll={releaseScroll} />
       )}

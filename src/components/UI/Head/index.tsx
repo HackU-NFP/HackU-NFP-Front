@@ -27,9 +27,6 @@ const _Head: React.FC<HeadProps> = ({ title, description, url, imageUrl }) => {
         <meta property='og:image:height' content={String(300)} />
 
         <meta name='twitter:card' content='summary_large_image' />
-        <meta name='twitter:site' content={url} />
-        <meta name='twitter:title' content={title} />
-        <meta name='twitter:image' content={imageUrl} />
       </Head>
     </div>
   );

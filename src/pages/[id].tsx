@@ -91,7 +91,7 @@ const NFTShow = () => {
           <Head
             title={`すまーとみんと - ${token.name}`}
             description={token.meta}
-            url={router.pathname}
+            url={`https://smart-mint.vercel.app${router.asPath}`}
             imageUrl={`${process.env.NEXT_PUBLIC_GCP_STORAGE}${token.tokenType}`}
           />
           <_NFTShow_Main>
