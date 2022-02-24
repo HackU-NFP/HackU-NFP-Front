@@ -91,5 +91,10 @@ export const _NFTIndex = {
       background: #000;
       color: #fff;
     }
+  `,
+  NotNFTText: styled.div`
+    display: flex;
+    justify-content: center;
+    padding-top: 5rem;
   `
 }
