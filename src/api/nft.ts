@@ -12,6 +12,16 @@ export const IndexNFT = async (params: queryParameter) => {
   return response;
 };
 
+export const IndexUserNFT = async (userId: string, params: queryParameter) => {
+  const response: AxiosResponse<IndexNFTResponse> = await axios.get(
+    `${baseUri}/api/users/${userId}/nfts`,
+    {
+      params,
+    }
+  );
+  return response;
+};
+
 export const ShowNFT = async (constractId: string, tokenType: string) => {
   const response: AxiosResponse<ShowNFTResponse> = await axios.get(
     `${baseUri}/api/nft`,

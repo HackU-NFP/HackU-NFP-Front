@@ -10,13 +10,13 @@ import { _NFTSlideShow } from './index.styles';
 
 type NFTSlideShowProps = {
   tokens: Token[];
-  loadFunc: () => void;
+  //loadFunc: () => void;
   releaseScroll: () => void;
 };
 
 const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
   releaseScroll,
-  loadFunc,
+  //loadFunc,
   tokens,
 }) => {
   const _ = _NFTSlideShow;
@@ -70,7 +70,7 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
       //   loadFunc();
       // }
     },
-    [currentImagesIndex, disableNextButton, tokens.length, isPlay, loadFunc]
+    [currentImagesIndex, disableNextButton, tokens.length, isPlay]
   );
 
   /**

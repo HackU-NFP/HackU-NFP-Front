@@ -17,17 +17,53 @@ export const _NFTIndex = {
   ButtonContainer: styled.div`
     display: flex;
     justify-content: space-between;
+    position: relative;
+  `,
+  FilterContainer: styled.div`
+    cursor: pointer;
+    min-width: 200px;
+    box-shadow: 0 0 9px gray;
+    position: absolute;
+    top: 52px;
+    left: 0;
+    background: #fff;
+    z-index: 3;
+  `,
+  FilterTextWrapper: styled.div<{ border?: boolean }>`
+    padding: 0.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ${(props) => {
+      return props.border && css`
+        border-top: 1px solid #000;
+      `
+    }}
+  `,
+  FilterText: styled.div`
+    padding: 0.8rem;
+  `,
+  FilterButton: styled.div`
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #9e9e9e;
   `,
   UserButton: styled.img<{ isUserMode: boolean }>`
     cursor: pointer;
     width: 50px;
     height: 50px;
+    background: linear-gradient(135deg, #427eff 0%, #f13f79 70%) no-repeat;
 
     ${(props) => {
       if (props.isUserMode) {
         return css`
           box-sizing: border-box;
-          border: 3px solid #000;
+          padding: 1%;
         `
       }
     }}
