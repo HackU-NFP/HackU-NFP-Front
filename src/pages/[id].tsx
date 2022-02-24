@@ -4,11 +4,14 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BsClockFill } from 'react-icons/bs';
+import { AiOutlineCopy } from 'react-icons/ai';
+import LayoutFlex from 'components/UI/LayoutFlex';
 
 const _NFTShow_Main = styled.div`
   max-width: 95%;
   margin: 0 auto;
   padding-bottom: 3%;
+  z-index: 1;
 `;
 const _NFTShow_Figure = styled.figure`
   width: 100%;
@@ -23,7 +26,7 @@ const _NFTShow_Image = styled.img`
 const _NFTShow_TextsWrapper = styled.div`
   max-width: 70%;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0.5rem;
 `;
 const _NFTShow_Title = styled.div`
   text-align: center;
@@ -47,6 +50,20 @@ const _NFTShow_CreatedText = styled.div`
   margin-top: 1rem;
   color: rgb(142, 142, 142);
 `;
+const _CopySuccessWrapper = styled.div`
+  min-width: 200px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 0 9px gray;
+  position: fixed;
+  bottom: 30px;
+  background: #fff;
+  padding: 1rem;
+  z-index: 3;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 5px;
+`;
 
 const NFTShow = () => {
   const router = useRouter();
@@ -54,6 +71,7 @@ const NFTShow = () => {
 
   const [token, setToken] = useState<Token | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isCopySuccess, setIdCopySuccess] = useState(false);
 
   const createdAt = useCallback((unixtime: number) => {
     const date = new Date(unixtime);
@@ -80,6 +98,17 @@ const NFTShow = () => {
     }
   };
 
+  const copyUrl = () => {
+    const url = location.href;
+    navigator.clipboard.writeText(url);
+    if (isCopySuccess) return;
+
+    setIdCopySuccess(true);
+    setTimeout(() => {
+      setIdCopySuccess(false);
+    }, 3000);
+  };
+
   useEffect(() => {
     getToken();
   }, [query, router]);
@@ -88,17 +117,22 @@ const NFTShow = () => {
     <>
       {!loading && token && (
         <>
-          <Head
-            title={`すまーとみんと - ${token.name}`}
-            description={token.meta}
-            url={`https://smart-mint.vercel.app${router.asPath}`}
-            imageUrl={`${process.env.NEXT_PUBLIC_GCP_STORAGE}${token.tokenType}`}
-          />
+          <Head title={`すまーとみんと - ${token.name}`} />
           <_NFTShow_Main>
             <_NFTShow_Figure>
-              <_NFTShow_Image
-                src={`${process.env.NEXT_PUBLIC_GCP_STORAGE}${token.tokenType}`}
-              />
+              <LayoutFlex direction='column' gap='small' align='flex-end'>
+                <_NFTShow_Image
+                  src={`${process.env.NEXT_PUBLIC_GCP_STORAGE}${token.tokenType}`}
+                />
+                <LayoutFlex justify='center' gap='medium'>
+                  <AiOutlineCopy
+                    onClick={copyUrl}
+                    size={'1.7rem'}
+                    color={'gray'}
+                    style={{ cursor: 'pointer' }}
+                  />
+                </LayoutFlex>
+              </LayoutFlex>
             </_NFTShow_Figure>
             <_NFTShow_TextsWrapper>
               <_NFTShow_Title>{token.name}</_NFTShow_Title>
@@ -108,6 +142,9 @@ const NFTShow = () => {
                 {createdAt(token.createdAt)}
               </_NFTShow_CreatedText>
             </_NFTShow_TextsWrapper>
+            {isCopySuccess && (
+              <_CopySuccessWrapper>URLをコピーしました</_CopySuccessWrapper>
+            )}
           </_NFTShow_Main>
         </>
       )}

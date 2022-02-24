@@ -54,16 +54,16 @@ export const _NFTImage_Figure = styled.figure<{ layout: LayoutType }>`
           width: 100%;
   
           @media ${breakpoints.sm} {
-            width: calc((100% - 20px * 1) / 2);
+            width: calc((100% - 13px * 1) / 2);
           }
           @media ${breakpoints.md} {
-            width: calc((100% - 20px * 1) / 2);
+            width: calc((100% - 13px * 1) / 2);
           }
           @media ${breakpoints.lg} {
-            width: calc((100% - 20px * 2) / 3);
+            width: calc((100% - 13px * 2) / 3);
           }
           @media ${breakpoints.xl} {
-            width: calc((100% - 20px * 3) / 4);
+            width: calc((100% - 13px * 3) / 4);
           }
         `
     }
