@@ -23,7 +23,7 @@ type FillterName = 'ALL' | 'MY';
 
 const NFTIndex = () => {
   const contractId = process.env.NEXT_PUBLIC_CONTRACTID as string;
-  const limit = 10;
+  const limit = 50;
   const orderBy = 'desc';
   const _ = _NFTIndex;
 

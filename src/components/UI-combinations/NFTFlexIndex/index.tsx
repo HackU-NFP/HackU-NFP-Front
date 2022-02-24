@@ -10,7 +10,7 @@ type NFTFlexIndexProps = {
 
 const NFTFlexIndex: React.FC<NFTFlexIndexProps> = ({ tokens, layout }) => {
   return (
-    <LayoutFlex gap='small' justify='space-between'>
+    <LayoutFlex gap='small' justify='flex-start'>
       {tokens.map((token, i) => (
         <NFTImage token={token} layout={layout} key={i} />
       ))}
