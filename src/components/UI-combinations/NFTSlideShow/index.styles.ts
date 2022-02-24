@@ -30,9 +30,13 @@ export const _NFTSlideShow = {
   `,
   Image: styled.img`
     max-width: 100%;
-    max-height: 400px;
+    max-height: 350px;
     user-select: none;
     pointer-events: none;
+
+    @media ${breakpoints.xsm} {
+      max-height: 400px;
+    }
 
     @media ${breakpoints.sm} {
       max-height: 600px;
