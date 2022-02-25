@@ -24,7 +24,7 @@ const _NFTShow_Image = styled.img`
   max-height: 500px;
 `;
 const _NFTShow_TextsWrapper = styled.div`
-  max-width: 70%;
+  width: 90%;
   margin: 0 auto;
 `;
 const _NFTShow_Title = styled.div`
@@ -62,6 +62,12 @@ const _CopySuccessWrapper = styled.div`
   left: 50%;
   transform: translateX(-50%);
   border-radius: 5px;
+`;
+const _NFTShow_Flex = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
 `;
 
 const NFTShow = () => {
@@ -119,7 +125,7 @@ const NFTShow = () => {
           <Head title={`すまーとみんと - ${token.name}`} />
           <_NFTShow_Main>
             <_NFTShow_Figure>
-              <LayoutFlex direction='column' gap='small' align='flex-end'>
+              <_NFTShow_Flex>
                 <_NFTShow_Image
                   src={`${process.env.NEXT_PUBLIC_GCP_STORAGE}${token.tokenType}`}
                 />
@@ -131,16 +137,16 @@ const NFTShow = () => {
                     style={{ cursor: 'pointer' }}
                   />
                 </LayoutFlex>
-              </LayoutFlex>
+                <_NFTShow_TextsWrapper>
+                  <_NFTShow_Title>{token.name}</_NFTShow_Title>
+                  <_NFTShow_Describe>{token.meta}</_NFTShow_Describe>
+                  <_NFTShow_CreatedText>
+                    <BsClockFill />
+                    {createdAt(token.createdAt)}
+                  </_NFTShow_CreatedText>
+                </_NFTShow_TextsWrapper>
+              </_NFTShow_Flex>
             </_NFTShow_Figure>
-            <_NFTShow_TextsWrapper>
-              <_NFTShow_Title>{token.name}</_NFTShow_Title>
-              <_NFTShow_Describe>{token.meta}</_NFTShow_Describe>
-              <_NFTShow_CreatedText>
-                <BsClockFill />
-                {createdAt(token.createdAt)}
-              </_NFTShow_CreatedText>
-            </_NFTShow_TextsWrapper>
             {isCopySuccess && (
               <_CopySuccessWrapper>URLをコピーしました</_CopySuccessWrapper>
             )}
