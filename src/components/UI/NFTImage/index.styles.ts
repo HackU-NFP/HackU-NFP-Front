@@ -14,7 +14,6 @@ export const _NFTImage_ImageTextWrapper = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
   transition: 0.3s;
-  padding: 0.3125rem;
   font-size: 1rem;
   color: #fff;
 
@@ -43,7 +42,7 @@ export const _NFTImage_Figure = styled.figure<{ layout: LayoutType }>`
       case 'gallery':
         return css`
           ${figure};
-          max-height: 500px;
+          max-height: 400px;
           width: 100%;
         `
       case 'flex':

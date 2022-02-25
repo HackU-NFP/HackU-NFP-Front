@@ -23,7 +23,7 @@ type FillterName = 'ALL' | 'MY';
 
 const NFTIndex = () => {
   const contractId = process.env.NEXT_PUBLIC_CONTRACTID as string;
-  const limit = 30;
+  const limit = 50;
   const orderBy = 'desc';
   const _ = _NFTIndex;
 
@@ -43,19 +43,6 @@ const NFTIndex = () => {
   const [isFilter, setIsFilter] = useState(false);
   const [loading, setLoading] = useState(true);
   const [currentFilter, setCurrentFilter] = useState<FillterName>('ALL');
-
-  useEffect(() => {
-    documentRef.current = (e: any) => {
-      if (!refEle.current?.contains(e.target)) {
-        setIsFilter(false);
-        document.removeEventListener('click', documentRef.current);
-      }
-    };
-  });
-
-  useEffect(() => {
-    isFilter && document.addEventListener('click', documentRef.current);
-  }, [isFilter]);
 
   const isLiff = useMemo(() => {
     return profile.profile && profile.isInClient ? true : false;
@@ -178,6 +165,19 @@ const NFTIndex = () => {
     setIsSlideShow(false);
     disableScroll.off();
   };
+
+  useEffect(() => {
+    documentRef.current = (e: any) => {
+      if (!refEle.current?.contains(e.target)) {
+        setIsFilter(false);
+        document.removeEventListener('click', documentRef.current);
+      }
+    };
+  });
+
+  useEffect(() => {
+    isFilter && document.addEventListener('click', documentRef.current);
+  }, [isFilter]);
 
   useEffect(() => {
     getTokens({

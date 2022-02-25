@@ -32,10 +32,11 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
   }, [isPlay]);
 
   const stopAutoSlider = useCallback(() => {
+    releaseScroll();
     if (isPlay) {
       setIsPlay(false);
     }
-  }, [isPlay]);
+  }, [isPlay, releaseScroll]);
 
   const disableBackButton = useCallback(() => {
     return currentImagesIndex === 0 ? true : false;
@@ -113,7 +114,7 @@ const NFTSlideShow: React.FC<NFTSlideShowProps> = ({
         <_.ImageWrapper>
           <_.ImageContainer>
             <Link href={`/${tokens[currentImagesIndex].tokenType}`} passHref>
-              <_.MoreTextLink onClick={stopAutoSlider} target='_blank'>
+              <_.MoreTextLink onClick={stopAutoSlider}>
                 <_.Image
                   alt='NFT'
                   src={`${process.env.NEXT_PUBLIC_GCP_STORAGE}${tokens[currentImagesIndex].tokenType}`}
