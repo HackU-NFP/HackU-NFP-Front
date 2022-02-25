@@ -14,9 +14,9 @@ type NFTImageProps = {
 
 const NFTImage: React.FC<NFTImageProps> = ({ token, layout }) => {
   return (
-    <Link href={`/${token.tokenType}`} passHref>
-      <a>
-        <_NFTImage_Figure layout={layout}>
+    <_NFTImage_Figure layout={layout}>
+      <Link href={`/${token.tokenType}`} passHref>
+        <a>
           <_NFTImage_Image
             alt='NFT'
             src={`${process.env.NEXT_PUBLIC_GCP_STORAGE}${token.tokenType}`}
@@ -26,9 +26,9 @@ const NFTImage: React.FC<NFTImageProps> = ({ token, layout }) => {
           <_NFTImage_ImageTextWrapper>
             <_NFTImage_ImageText>{token.name}</_NFTImage_ImageText>
           </_NFTImage_ImageTextWrapper>
-        </_NFTImage_Figure>
-      </a>
-    </Link>
+        </a>
+      </Link>
+    </_NFTImage_Figure>
   );
 };
 
